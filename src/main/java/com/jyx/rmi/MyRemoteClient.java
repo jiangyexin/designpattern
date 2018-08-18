@@ -18,6 +18,7 @@ public class MyRemoteClient {
 
     public void invoke() {
         try {
+            System.out.println("开始调用rmi");
             MyRemote service = (MyRemote) Naming.lookup("rmi://localhost:8739/RemoteHello");
             String result = service.sayHello();
             System.out.println(result);
