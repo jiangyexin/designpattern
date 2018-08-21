@@ -17,18 +17,30 @@ public class ThreadsTest {
     public static final ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(coreSize, maxSize,keepAliveTime, TimeUnit.SECONDS,linkedBlockingQueue,rejectedExe);
     public static void main(String[] args) {
         Runnable runnable = new RunnableImpl();
-        Thread trun = new Thread(runnable);
-        trun.start();
+        Runnable runnable1 = new RunnableImpl();
+        Runnable runnable2 = new RunnableImpl();
+        Runnable runnable3 = new RunnableImpl();
 
         Thread threadSub = new ThreadSub();
-        threadSub.start();
 
         Callable callable = new CallableImpl();
 
         threadPoolExecutor.submit(runnable);
+        threadPoolExecutor.submit(runnable);
+        threadPoolExecutor.submit(runnable);
+        threadPoolExecutor.submit(runnable);
+        threadPoolExecutor.submit(runnable);
+        threadPoolExecutor.submit(runnable);
+
 
         threadPoolExecutor.submit(callable);
         threadPoolExecutor.submit(threadSub);
+
+        while (true) {
+            if (threadPoolExecutor.getQueue().size() > 1) {
+                System.out.println("队列数大于1" + threadPoolExecutor.getQueue().size());
+            }
+        }
 
 
     }
@@ -41,8 +53,13 @@ class RunnableImpl implements Runnable {
     public static final String runnable = "RunnableImpl RunnableImpl";
     public void run() {
         while (true) {
-            System.out.println("runableImpl runing");
-            System.out.println(ThreadsTest.threadPoolExecutor.getQueue().size());
+            try {
+                System.out.println("runableImpl runing");
+                Thread.sleep(15000);
+                System.out.println("runableImpl end");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }
@@ -53,7 +70,13 @@ class ThreadSub extends Thread {
     @Override
     public void run() {
         while (true) {
-            System.out.println("ThreadSub runing");
+            try {
+                System.out.println("ThreadSub runing");
+                Thread.sleep(15000);
+                System.out.println("ThreadSub end");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }
@@ -64,7 +87,13 @@ class CallableImpl implements Callable {
     public static final String call = "call callableimpl";
     public Object call() throws Exception {
         while (true) {
-            System.out.println("CallableImpl runing");
+            try {
+                System.out.println("call runing");
+                Thread.sleep(15000);
+                System.out.println("call end");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }
