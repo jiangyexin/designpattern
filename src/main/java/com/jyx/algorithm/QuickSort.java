@@ -17,12 +17,6 @@ import java.util.Collections;
  * @Date: 2018-08-22 10:41
  **/
 public class QuickSort {
-    public static void printArr(int arr[]) {
-        for (int i = 0; i < arr.length; i++) {
-            System.out.println(arr[i]);
-        }
-    }
-
     public static void quickSorte(int[] arr, int left, int right) {
         int i,j,base,temp;
         if (left > right) {
@@ -60,7 +54,7 @@ public class QuickSort {
         ArrayList arr1 = new ArrayList();
 
         Collections.synchronizedList(arr1);
-        printArr(arr);
+        PrintArr.printArr(arr);
     }
 
 
