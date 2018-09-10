@@ -15,6 +15,7 @@ public class ThreadsTest {
     public static final LinkedBlockingQueue linkedBlockingQueue = new LinkedBlockingQueue(queueSize);
     public static final RejectedExecutionHandlerImpl rejectedExe = new RejectedExecutionHandlerImpl();
     public static final ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(coreSize, maxSize,keepAliveTime, TimeUnit.SECONDS,linkedBlockingQueue,rejectedExe);
+    public CountDownLatch countDownLatch = new CountDownLatch(10);
     public static void main(String[] args) {
         Runnable runnable = new RunnableImpl();
         Runnable runnable1 = new RunnableImpl();
@@ -33,8 +34,16 @@ public class ThreadsTest {
         threadPoolExecutor.submit(runnable);
 
 
-        threadPoolExecutor.submit(callable);
+        Future future = threadPoolExecutor.submit(callable);
         threadPoolExecutor.submit(threadSub);
+
+        try {
+            Object o = future.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
         while (true) {
             if (threadPoolExecutor.getQueue().size() > 1) {

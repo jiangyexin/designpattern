@@ -1,6 +1,7 @@
 package com.jyx.algorithm;
 
 import java.util.*;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author: jiangyexin
@@ -41,6 +42,8 @@ public class Test {
         while (!priorityQueue.isEmpty()) {
             System.out.println(priorityQueue.poll());
         }
+        ReentrantLock lock = new ReentrantLock();
+        ThreadLocal t = new ThreadLocal();
     }
     public static Comparator<Integer> comparator = new Comparator<Integer>() {
         public int compare(Integer o1, Integer o2) {
