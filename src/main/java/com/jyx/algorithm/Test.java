@@ -5,10 +5,24 @@ import java.util.*;
 /**
  * @author: jiangyexin
  * @Description:
+ * 算法
+ * 1、排序
+ * 选择排序、插入排序、希尔排序、归并排序、快速排序、堆排序（优先队列）
+ * 2、查找
+ * 顺序查找（基于无序链表）、二分查找（基于有序数组）、二叉查找树、
+ * 平衡查找树 {
+ *            2-3查找树
+ *            红黑二叉查找树
+ * }
+ * 散列表
  * @Date: 2018-08-22 13:55
  **/
 public class Test {
     public static void main(String[] args) {
+        Test test = new Test();
+        test.hashCode();
+        test.equals(test.hashCode());
+
         Queue<Integer> queue = new LinkedList<Integer>();
         queue.offer(1);
         queue.offer(2);
