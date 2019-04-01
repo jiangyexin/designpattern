@@ -28,7 +28,7 @@ public class Test {
         items.add(new UrgeBO(new Date(date.getTime() - 6000)));
         items.add(new UrgeBO(new Date(date.getTime() + 3000)));
 
-        List<UrgeBO> res = items.stream().sorted(Comparator.comparing(UrgeBO::getUrgeDate)).collect(Collectors.toList());
+        List<UrgeBO> res = null;//items.stream().sorted(Comparator.comparing(UrgeBO::getUrgeDate)).collect(Collectors.toList());
         //Collections.sort(items, Comparator.comparing(UrgeBO::getUrgeDate));
         for (int i = 0; i < res.size(); i++) {
             System.out.println(res.get(i).getUrgeDate());

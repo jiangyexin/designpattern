@@ -47,7 +47,7 @@ public class Test {
         stack.empty();
 
 
-        Queue<Integer> priorityQueue = new PriorityQueue<>(comparator);
+        Queue<Integer> priorityQueue = new PriorityQueue<Integer>(comparator);
         priorityQueue.offer(9);
         priorityQueue.offer(5);
         priorityQueue.offer(7);
