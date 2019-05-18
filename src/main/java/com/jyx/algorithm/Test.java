@@ -1,6 +1,7 @@
 package com.jyx.algorithm;
 
 import java.util.*;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -58,6 +59,7 @@ public class Test {
         }
         ReentrantLock lock = new ReentrantLock();
         ThreadLocal t = new ThreadLocal();
+        Condition condition = lock.newCondition();
     }
     public static Comparator<Integer> comparator = new Comparator<Integer>() {
         public int compare(Integer o1, Integer o2) {
@@ -70,7 +72,7 @@ public class Test {
         public Node left;
         public Node right;
     }
-    public static List<Node> visitor = new ArrayList<Node>();
+    public static List<Node> visitor = new LinkedList<>();
     public static void binScan(Node root) {
         while (root != null) {
             /*先序遍历 中左右*/
@@ -79,8 +81,14 @@ public class Test {
             binScan(root.right);
 
             /*中序遍历 左中右*/
+            /*binScan(root.left);
+            visitor.add(root);
+            binScan(root.right);*/
 
             /*后序遍历 左右中*/
+            /*binScan(root.left);
+            binScan(root.right);
+            visitor.add(root);*/
         }
     }
 }
