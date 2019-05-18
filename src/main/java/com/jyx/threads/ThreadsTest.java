@@ -17,6 +17,14 @@ public class ThreadsTest {
     public static final ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(coreSize, maxSize,keepAliveTime, TimeUnit.SECONDS,linkedBlockingQueue,rejectedExe);
     public CountDownLatch countDownLatch = new CountDownLatch(10);
     public static void main(String[] args) {
+        /*核心线程数和最大线程数都是 1 阻塞队列是 linkedBlockingQueue 默认队列大小是 int最大值*/
+        Executor singleThreadExecutor = Executors.newSingleThreadExecutor();
+        /*核心线程数和最大线程数都是 传入的值 阻塞队列是 linkedBlockingQueue 默认队列大小是 int最大值*/
+        Executor fixedThreadPool = Executors.newFixedThreadPool(5);
+        /*核心线程数 0 最大线程数 max int 传入的值 阻塞队列是 SynchronousQueue*/
+        Executor cachedThreadPool = Executors.newCachedThreadPool();
+        /*核心线程数 传入值 最大线程数 max int 传入的值 阻塞队列是 DelayedWorkQueue 延时队列*/
+        Executor scheduledThreadPool = Executors.newScheduledThreadPool(5);
         Runnable runnable = new RunnableImpl();
         Runnable runnable1 = new RunnableImpl();
         Runnable runnable2 = new RunnableImpl();
@@ -50,8 +58,6 @@ public class ThreadsTest {
                 System.out.println("队列数大于1" + threadPoolExecutor.getQueue().size());
             }
         }
-
-
     }
 }
 
