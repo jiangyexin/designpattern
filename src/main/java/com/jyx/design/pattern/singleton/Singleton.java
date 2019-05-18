@@ -8,7 +8,7 @@ package com.jyx.design.pattern.singleton;
 public class Singleton {
     /*私有静态防止被引用 赋值为null是延迟加载*/
     private static volatile Singleton instance = null;
-
+    /*构造方法私有防止外部通过new的方式获得对象*/
     private Singleton() {
 
     }
@@ -18,7 +18,6 @@ public class Singleton {
             instance = new Singleton();
         }
     }*/
-
 
     public static Singleton getInstance() {
         if (instance == null) {
