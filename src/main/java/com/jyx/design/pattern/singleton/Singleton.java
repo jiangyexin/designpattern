@@ -7,22 +7,25 @@ package com.jyx.design.pattern.singleton;
  **/
 public class Singleton {
     /*私有静态防止被引用 赋值为null是延迟加载*/
-    private static Singleton instance = null;
-
+    private static volatile Singleton instance = null;
+    /*构造方法私有防止外部通过new的方式获得对象*/
     private Singleton() {
 
     }
 
-    private static synchronized void syncInit() {
+   /* private static synchronized void syncInit() {
         if (instance == null) {
             instance = new Singleton();
         }
-    }
-
+    }*/
 
     public static Singleton getInstance() {
         if (instance == null) {
-            syncInit();
+            synchronized (Singleton.class) {
+                if (instance == null) {
+                    instance = new Singleton();
+                }
+            }
         }
         return instance;
     }
