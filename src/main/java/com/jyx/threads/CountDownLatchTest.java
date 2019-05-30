@@ -9,8 +9,9 @@ import java.util.concurrent.CountDownLatch;
  **/
 public class CountDownLatchTest {
     public static void main(String[] args) {
-        CountDownLatch countDownLatch = new CountDownLatch(1);
-        for (int i = 0; i < 10; i++) {
+        int n = 10;
+        CountDownLatch countDownLatch = new CountDownLatch(n);
+        for (int i = 0; i < n; i++) {
             Workerc worker = new Workerc(i, countDownLatch);
             new Thread(worker).start();
             try {
@@ -34,6 +35,7 @@ class Workerc implements Runnable {
     @Override
     public void run() {
         System.out.println("Worker " + state + " begin---------------------!" + System.currentTimeMillis());
+        countDownLatch.countDown();
         try {
             countDownLatch.await();
         } catch (InterruptedException e) {
