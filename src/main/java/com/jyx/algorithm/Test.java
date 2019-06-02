@@ -70,13 +70,14 @@ public class Test {
     /*二叉树遍历*/
     class Node {
         public Node left;
+        public Object data;
         public Node right;
     }
-    public static List<Node> visitor = new LinkedList<>();
+    public static List<Object> visitor = new LinkedList<>();
     public static void binScan(Node root) {
         while (root != null) {
             /*先序遍历 中左右*/
-            visitor.add(root);
+            visitor.add(root.data);
             binScan(root.left);
             binScan(root.right);
 
@@ -89,6 +90,21 @@ public class Test {
             /*binScan(root.left);
             binScan(root.right);
             visitor.add(root);*/
+        }
+    }
+
+    /**
+     * 求二叉树的高度
+     * @param root
+     * @return
+     */
+    public static int height(Node root) {
+        if (root == null) {
+            return 0;
+        } else {
+            int lheight = height(root.left);
+            int rheight = height(root.right);
+            return lheight > rheight ? lheight + 1 : rheight +1;
         }
     }
 }
