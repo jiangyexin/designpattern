@@ -28,4 +28,22 @@ public class DpShares {
         }
         return profit;
     }
+
+    public int maxProfit1(int[] prices) {
+        int[][] dp = new int[prices.length][2];
+        for (int i = 0; i < prices.length; i++) {
+            if (i - 1 == -1) {
+                //第0天两种选择，不操作or买入:没有操作，收益为0
+                dp[i][0] = 0;
+                //第0天两种选择，不操作or买入:没有操作，收益为负的第0天的股票价格
+                dp[i][1] = -prices[i];
+                continue;
+            }
+            //第i天没有持有股票：前一天就没有持有和前一天有股票今天卖出
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+            //第i天持有股票：前一天就持有和前一天有股票今天买入
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
+        }
+        return dp[prices.length - 1][0];
+    }
 }
