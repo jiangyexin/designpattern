@@ -1,4 +1,4 @@
-package com.jyx.blockingqueue;
+package com.jyx.algorithm;
 
 import java.util.ArrayList;
 import java.util.List;

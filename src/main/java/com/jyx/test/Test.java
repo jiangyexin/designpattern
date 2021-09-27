@@ -1,7 +1,10 @@
 package com.jyx.test;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author: jiangyexin
@@ -15,7 +18,7 @@ public class Test {
         java.util.Calendar calendar = java.util.Calendar.getInstance();
         calendar.roll(java.util.Calendar.DAY_OF_YEAR, -1);
         String yesterday = df.format(calendar.getTime());
-
+        ArrayList<Integer> arrayList = new ArrayList<>();
 
         HashMap map = new HashMap();
         map.values();
@@ -37,7 +40,6 @@ public class Test {
         for (int i = 0; i < items.size(); i++) {
             System.out.println(items.get(i).getUrgeDate());
         }
-
     }
 }
 final class UrgeBO {

@@ -1,6 +1,13 @@
 package com.jyx.algorithm;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Stack;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -106,6 +113,58 @@ public class Test {
             int rheight = height(root.right);
             return lheight > rheight ? lheight + 1 : rheight +1;
         }
+    }
+
+    public boolean isPalindrome(String s) {
+        s = s.toLowerCase();
+        int left = 0, right = s.length() - 1;
+        while (left < right) {
+            while (left < right && !check(s.charAt(left))) {
+                left++;
+            }
+            while (left < right && !check(s.charAt(right))) {
+                right--;
+            }
+            if (s.charAt(left) != s.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+    private boolean check(char c) {
+        if ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')) {
+            return true;
+        }
+        return false;
+    }
+    //生成最长回文串的长度
+    public int longestPalindrome(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+
+        Map<Character, Integer> countMap = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            Integer count = countMap.get(c);
+            if (count == null) {
+                countMap.put(c, 1);
+            } else {
+                countMap.put(c, count + 1);
+            }
+        }
+        int len = 0;
+        boolean oddFlag = false;
+        for (Map.Entry<Character, Integer> entry : countMap.entrySet()) {
+            if (entry.getValue() % 2 == 0) {
+                len = len + entry.getValue();
+            } else {
+                len = len + entry.getValue() - 1;
+                oddFlag = true;
+            }
+        }
+        return oddFlag ? len + 1 : len;
     }
 }
 /*二分查找、深度优先、广度优先*/

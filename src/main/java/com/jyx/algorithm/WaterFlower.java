@@ -1,8 +1,11 @@
-package com.jyx.test;
+package com.jyx.algorithm;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Q:水仙花数
+ */
 public class WaterFlower {
     public static void main(String[] args) {
         List result = new ArrayList();

@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-import static sun.nio.ch.IOStatus.check;
-
 /**
  * @author jiangyexin
  * @date 2021/8/10 15:07
@@ -261,6 +259,35 @@ public class LeetCodeLinkedList {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 一个字符串有多少个回文串，中心扩展法
+     * https://leetcode-cn.com/problems/palindromic-substrings/
+     * @param s
+     * @return
+     */
+    public static int countSubstrings(String s) {
+        //单中心
+        int count = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int left = i, right = i;
+            while (left >= 0 && left < s.length() && right >= 0 && right <= s.length() - 1 && s.charAt(left) == s.charAt(right)) {
+                count++;
+                left--;
+                right++;
+            }
+        }
+        //双中心
+        for (int i = 0; i < s.length() - 1; i++) {
+            int left = i, right = i + 1;
+            while (left >= 0 && left <= s.length() - 1 && right >= 1 && right <= s.length() - 1 && s.charAt(left) == s.charAt(right)) {
+                count++;
+                left--;
+                right++;
+            }
+        }
+        return count;
     }
 
     static class ListNode {
